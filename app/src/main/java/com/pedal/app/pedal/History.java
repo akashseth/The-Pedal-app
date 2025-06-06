@@ -90,7 +90,9 @@ public class History extends BaseActivity {
         }
         else {
             String totalTime = "", totalTimeText = "", totalDistance = "";
-            SimpleDateFormat timeFormat = new SimpleDateFormat("mmm:ss");
+            // "mmm:ss" expects a three digit minute which is incorrect for
+            // values like "12:34". Use two digit minute format instead.
+            SimpleDateFormat timeFormat = new SimpleDateFormat("mm:ss");
 
             ObjectHistoryItem[] item = new ObjectHistoryItem[size];
             for (int i = size - 1; i >= 0; i--) {
@@ -136,7 +138,10 @@ public class History extends BaseActivity {
             int j = 0;
 
             SimpleDateFormat parseDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            SimpleDateFormat parseTime = new SimpleDateFormat("mmm:ss");
+            // The cycling time is stored as minutes and seconds (e.g. "05:23").
+            // Using "mmm" would require three digits for minutes and fails to
+            // parse standard two digit values. Use "mm" instead.
+            SimpleDateFormat parseTime = new SimpleDateFormat("mm:ss");
 
             SimpleDateFormat displayTime = new SimpleDateFormat("hh:mm a");
             SimpleDateFormat displayDate = new SimpleDateFormat("dd MMM'' yyyy");
