@@ -90,7 +90,9 @@ public class SummaryOfActivity extends BaseActivity {
 
     public void setTimeOnSummaryPage() {
         SimpleDateFormat parseDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        SimpleDateFormat parseTime = new SimpleDateFormat("mmm:ss");
+        // "mmm" expects a three digit minute and will not correctly parse
+        // values like "10:05". Use the two digit minute pattern.
+        SimpleDateFormat parseTime = new SimpleDateFormat("mm:ss");
 
         SimpleDateFormat displayTime = new SimpleDateFormat("h:mm a");
         SimpleDateFormat displayDate = new SimpleDateFormat("MMMM dd,yyyy");
